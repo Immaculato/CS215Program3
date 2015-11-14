@@ -1,3 +1,6 @@
+#ifndef Person_H
+#define Person_H
+
 #include <vector>
 #include <string>
 
@@ -61,3 +64,5 @@ private:
 	string major;
 
 };
+
+#endif

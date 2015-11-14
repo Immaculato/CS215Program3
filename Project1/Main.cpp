@@ -112,8 +112,14 @@ int main():  Main driver program.
 
 Pseudocode for main:
 1. Prompt the user for the name of a person list file in a while loop.
-2. While user hasn't supplied a valid name: try to load the file. If they don't supply a valid name, clear the failing state and ask again. If they press enter without pushing anything, initialize the person list as empty.
-3. Ask the user what they want to do (P, E, S, F, A, R, or Q; these correspond to printing the whole person list, printing employees, printing students, finding a person, adding a person, removing a person, and quitting)
-4. Carry out what the user wants to do: printPersons() for P, printEmployees() for E, printStudents() for S, use findPerson() and then the methods relevant for that person's information for F, addPerson() for A, and removePerson for R. Quit if the user supplied Q by returning 0.
+2. While user hasn't supplied a valid name: try to load the file. If they don't supply a valid name, 
+	clear the failing state and ask again. If they press enter without pushing anything, initialize 
+	the person list as empty.
+3. Ask the user what they want to do (P, E, S, F, A, R, or Q; these correspond to printing the 
+	whole person list, printing employees, printing students, finding a person, adding a person, 
+	removing a person, and quitting)
+4. Carry out what the user wants to do: printPersons() for P, printEmployees() for E, printStudents() 
+	for S, use findPerson() and then the methods relevant for that person's information for F, addPerson()
+	for A, and removePerson for R. Quit if the user supplied Q by returning 0.
 
 */

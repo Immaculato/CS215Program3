@@ -1,9 +1,16 @@
+#ifndef PersonList_H
+#define PersonList_H
+
 #include <iostream>
 #include <vector>
 #include <stdexcept>
 #include "Person.h"
+#include "Helpers.h"
 
 using namespace std;
+
+Person *parsePerson(string line);
+	//helper function to parse a line from the split lines of the file into a person.
 
 class PersonList
 {
@@ -27,3 +34,5 @@ public:
 private:
 	vector<Person*> personlist; //create a vector to hold the pointers to the people.
 };
+
+#endif
