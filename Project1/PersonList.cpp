@@ -26,8 +26,8 @@ Person* parsePerson(string line)
 	if (year < 1900 || year > 2014)
 			throw runtime_error("year out of range");
 
-	if (type == "student") {
-		if (columns.size() < 6)
+	if (type == "student") {      //if the line says that it's a studnet,
+		if (columns.size() < 6)   //verify the line is formatted correctly.
 			throw runtime_error("not enough columns in: " + line);
 		string level = columns[3];
 		double gpa = stringToDouble(columns[4]);
@@ -35,23 +35,22 @@ Person* parsePerson(string line)
 		if (gpa < 0.0 || gpa > 4.0)
 			throw runtime_error("GPA out of range");
 
-		// Adjust this to match your class name and parameters.
+		// finally, return a new pointer to the student.
 		return new Student(name, year, level, gpa, major);
 	}
 
-	if (type == "employee")
+	if (type == "employee")      //if the line says that it's an employee,
 	{
-		if (columns.size() < 5)
+		if (columns.size() < 5)  //verify that the line is formatted correctly.
 		{
 			throw runtime_error("not enough columns in " + line);
 		}
 		string salaryparam = columns[3]; 
 		int durationparam = stringToInt(columns[4]);
 		
+		// finally, return a new pointer to the employee.
 		return new Employee(name, year, salaryparam, durationparam);
 	}
-
-	// TODO: add case for "employee"
 
 	// If we got here, we didn't handle the person type.
 	throw runtime_error("unknown person type " + type);
@@ -66,17 +65,14 @@ PersonList::PersonList(string filename)
 	if (infile.fail() == true) //if the file fails to open,
 	{
 		
-		//throw runtime_error("Error: Cannot open the file."); //throw a runtime error!
-		cout << "FILE NOT LOADED; IMPLEMENT AN ERROR HERE!";
+		throw runtime_error("Error: Cannot open the file."); //throw a runtime error!
 	}
 
 	string line;
-	int filelineindex = 0;
 	while (getline(infile, line)) //while the file is still supplying valid lines,
 	{
-		vector<string> contentsOfLine;
-		contentsOfLine = splitString(line);
-		personlist.push_back(parsePerson(line));
+		personlist.push_back(parsePerson(line)); //push back the pointer to the derived object to the array
+
 	}
 }
 		//Initialize the personlist by parsing information from a given file.
@@ -89,7 +85,7 @@ void PersonList::printPersons()
 {
 	for (int i = 0; i < personlist.size(); i++)
 	{
-		personlist[0]->write();
+		personlist[i]->write();
 	}
 }
 		//Print all of the data for each relevant person in an easy-to-read format. Calls .write() method for each person.
