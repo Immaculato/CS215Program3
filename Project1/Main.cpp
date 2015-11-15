@@ -11,7 +11,6 @@ using namespace std;
 
 int main()
 {
-	system("pause");
 	
 	string nameoffile;
 
@@ -40,15 +39,18 @@ int main()
 			getline(cin, nameoffile); //ask for a valid file name again.
 		}
 	}
-	personlist.printPersons();
-
-	system("pause");
 
 	bool finishedwithprogram = false;
 	char userchoice;
 	while (!finishedwithprogram)
 	{
+		cout << "\nYou may view a [P]erson, [E]mployee or [S]tudent list, \n"
+			<< "[F]ind a person, [A]dd a new person, [R]emove a person, \n"
+			<< "sa[V]e the list, save as a [N]ew file, or [Q]uit." << endl
+			<< "\nEnter a command: ";
 		cin >> userchoice;
+		userchoice = toupper(userchoice);
+
 		if (userchoice == 'P')
 		{
 			personlist.printPersons();
@@ -63,32 +65,96 @@ int main()
 		}
 		else if (userchoice == 'F')
 		{
-			string personlookingfor;
+			string personfirstname;
+			string personlastname;
 			cout << "Person's Name? ";
-			getline(cin, personlookingfor);
-			personlist.findPerson(personlookingfor).write();
+			try
+			{
+				cin >> personfirstname >> personlastname;
+				cout << personlist.findIndexPerson(personfirstname + " " + personlastname) << ".";
+				personlist.findPerson(personfirstname + " " + personlastname)->write();
+			}
+			catch (runtime_error r)
+			{
+				cout << r.what() << "\n";
+			}
 		}
 		else if (userchoice == 'A')
 		{
 			char personstatus;
+			cout << "[E]mployee, or [S]tudent? ";
 			cin >> personstatus;
-			if (personstatus == 'E')
+			while (true)
 			{
-				string name;
-				string yearofbirth;
-				string salary;
-				string durationofemployment;
-				cout << "Name: ";
-				getline(cin, name);
-				cout << "\nYear of Birth: ";
-				cin >> yearofbirth;
-				cout << "\nSalary: ";
-				cin >> salary;
-				cout << "\nDuration of employment";
-				cin >> durationofemployment;
+				if (toupper(personstatus) == 'E')
+				{
+					string firstname;
+					string lastname;
+					string yearofbirth;
+					string salary;
+					string durationofemployment;
+					cout << "Name: ";
+					cin >> firstname >> lastname;
+					cout << "\nYear of birth: ";
+					cin >> yearofbirth;
+					cout << "\nSalary: ";
+					cin >> salary;
+					cout << "\nDuration of employment: ";
+					cin >> durationofemployment;
+					personlist.addPerson(new Employee((firstname + " " + lastname), stringToInt(yearofbirth),
+						salary, stringToInt(durationofemployment)));
+					break;
+				}
+				else if (toupper(personstatus) == 'S')
+				{
+					string firstname;
+					string lastname;
+					string yearofbirth;
+					string levelofstudy;
+					string GPA;
+					string major;
+					cout << "Name: ";
+					cin >> firstname >> lastname;
+					cout << "\nYear of birth: ";
+					cin >> yearofbirth;
+					cout << "\nLevel of study: ";
+					cin >> levelofstudy;
+					cout << "\nGPA: ";
+					cin >> GPA;
+					cout << "\nMajor: ";
+					cin >> major;
+
+					personlist.addPerson(new Student((firstname + " " + lastname), stringToInt(yearofbirth),
+						levelofstudy, stringToDouble(GPA), major));
+					break;
+				}
+				else
+				{
+					cout << "Unknown command: " << char(toupper(personstatus)) << endl;
+					cout << "\n[E]mployee, or [S]tudent? ";
+					cin >> personstatus;
+				}
 			}
+
+			//string nameparam, int yearofbirthparam,
+					//string levelofstudyparam, double GPAparam, string majorparam
 		}
+		else if (userchoice == 'R')
+		{
+			int indexuser;
+			cout << "Please enter the number associated with the person [0-10, -1 to cancel]: ";
+			cin >> indexuser;
+			personlist.removePerson(indexuser);
+		}
+
+		else if (userchoice == 'Q')
+		{
+			finishedwithprogram = true;
+		}
+
 	}
+	system("pause");
+	return 1;
 
 }
 /*

@@ -85,7 +85,7 @@ void PersonList::printPersons()
 {
 	for (int i = 0; i < personlist.size(); i++)
 	{
-		cout << i+1 << ".";
+		cout << i << ".";
 		personlist[i]->write();
 		cout << "\n";
 	}
@@ -99,7 +99,7 @@ void PersonList::printEmployees()
 		Employee* employeeptr = dynamic_cast<Employee*>(personptr);
 		if (employeeptr) // if converted pointer is not NULL
 			{
-				cout << i+1 << ".";
+				cout << i << ".";
 				employeeptr->write();
 				cout << "\n";
 			}
@@ -115,7 +115,7 @@ void PersonList::printStudents()
 		Student* studentptr = dynamic_cast<Student*>(personptr);
 		if (studentptr) // if converted pointer is not NULL
 			{
-				cout << i+1 << ".";
+				cout << i << ".";
 				studentptr->write();
 				cout << "\n";
 			}
@@ -123,7 +123,7 @@ void PersonList::printStudents()
 }
 
 		//Print all the data for each relevant student in an easy-to-read format. Calls .isStudent() for each person, and .write() method for each student.
-Person PersonList::findPerson(string personname)
+Person* PersonList::findPerson(string personname)
 {
 	bool notfound = true;
 	int index = 0;
@@ -131,44 +131,46 @@ Person PersonList::findPerson(string personname)
 	{
 		if ((personlist[index]->personName()) == personname )
 		{
-			return *personlist[index];
+			return personlist[index];
 		}
 		index++;
 	}
-	cout << "No person was found. Was person name correct?";
+	throw runtime_error("Person not found!");
 }
-	
-		//Search for a person with the given string name in the vector of persons. If found, return the person object corresponding to the given person name. Uses .personName() method to find the name of each person.
-void PersonList::addPerson(Person givenperson)
-{
-	Person* personptr = new Person;
-	//make a new pointer to a person
-	personptr = &givenperson;
-	//deepcopy the given pointer
-	personlist.push_back(personptr);
-	//push it back to the list
-}
-		//Push back a given person to the personlist.
-void PersonList::removePerson(Person givenperson)
+
+int PersonList::findIndexPerson(string personname)
 {
 	bool notfound = true;
 	int index = 0;
 	while (notfound && (index < personlist.size()))
 	{
-		if ((personlist[index]->personName() == givenperson.personName()) && 
-			(personlist[index]->personYear() == givenperson.personYear()))
+		if ((personlist[index]->personName()) == personname )
 		{
-			Person* persontoremove = personlist[index];
-			for (int j = index; j < personlist.size()-2; j++)
-			{
-				personlist[j] = personlist[j+1];
-			}
-			personlist[personlist.size()-1] = persontoremove;
-			personlist.pop_back();
-			return;
+			return index;
 		}
 		index++;
 	}
-	cout << "Nothing was removed. Was person in list?";
+	throw runtime_error("Person not found!");
+}
+		//Search for a person with the given string name in the vector of persons. If found, return the person object corresponding to the given person name. Uses .personName() method to find the name of each person.
+void PersonList::addPerson(Person* givenperson)
+{
+	personlist.push_back(givenperson);
+}
+		//Push back a given person to the personlist.
+void PersonList::removePerson(int personindex)
+{
+	if (personindex >= 0 && personindex < personlist.size())
+	{
+		for (int i = personindex; i < personlist.size()-1; i++)
+		{
+			personlist[i] = personlist[i+1];
+		}
+	}
+	else
+	{
+		throw range_error("Index out of range!");
+	}
+	personlist.pop_back();
 }
 		//Remove a given person from the personlist.
