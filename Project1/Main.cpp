@@ -6,6 +6,8 @@
 #include "Helpers.h"
 #include "Person.h"
 #include "PersonList.h"
+#include "Student.h"
+#include "Employee.h"
 
 using namespace std;
 
