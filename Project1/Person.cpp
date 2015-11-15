@@ -1,6 +1,7 @@
 #include "Person.h"
 #include <iostream>
 #include <iomanip>
+#include <fstream>
 
 using namespace std;
 
@@ -13,6 +14,10 @@ Person::Person(string nameparam, int yearofbirthparam)
 {
 	name = nameparam;
 	yearofbirth = yearofbirthparam;
+}
+
+Person::~Person()
+{
 }
 
 		//Create a person with a given string name and a given int year of birth.
@@ -35,9 +40,10 @@ void Person::write() const
 
 		//Print the given person's name and year of birth to standard output stream.
 
-void Person::writeToOutput(string nameoffile) const
+string Person::writeFormatted() const
 {
-	cout << "IMPLEMENT THIS";
+	string junkstring = "you better not be seeing this";
+	return junkstring;
 }
 
 
@@ -49,6 +55,10 @@ Employee::Employee(string nameparam, int yearofbirthparam, string salaryparam, i
 {
 	salary = salaryparam;
 	duration = durationparam;
+}
+
+Employee::~Employee()
+{
 }
 
 			//Create an employee with the given int salary and int duration.
@@ -73,8 +83,11 @@ void Employee::write() const
 
 		//Rather than just print the employees name and year, this override will print those, with the employee's salary and duration.
 
-void Employee::writeToOutput(string nameoffile) const
+string Employee::writeFormatted() const
 {
+	string formattedstring = "employee#" + personName() + "#" + to_string(personYear()) + "#" + salary + "#"
+		+ to_string(duration);
+	return formattedstring;
 }
 
 		//Rather than just write the employees name and year, this override will print those, 
@@ -86,6 +99,10 @@ Student::Student(string nameparam, int yearofbirthparam, string levelofstudypara
 	levelofstudy = levelofstudyparam;
 	GPA = GPAparam;
 	major = majorparam;
+}
+
+Student::~Student()
+{
 }
 
 			//Create a student with the given level of study, GPA, and major. Sets student_status to True.
@@ -112,8 +129,10 @@ void Student::write() const
 
 		//Rather than just print the student's name and year, this override will print those, with the student's level of study, gpa, and major.
 
-void Student::writeToOutput(string nameoffile) const
+string Student::writeFormatted() const
 {
-	//shit
+	string formattedstring = "student#" + personName() + "#" + to_string(personYear()) + "#" + levelofstudy + "#"
+		+ to_string(GPA) + "#" + major;
+	return formattedstring;
 }
 		//Rather than just write the student's name and year, this override will print those, with the student's level of study, gpa, and major.

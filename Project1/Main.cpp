@@ -115,13 +115,13 @@ int main()
 					string major;
 					cout << "Name: ";
 					cin >> firstname >> lastname;
-					cout << "\nYear of birth: ";
+					cout << "Year of birth: ";
 					cin >> yearofbirth;
-					cout << "\nLevel of study: ";
+					cout << "Level of study: ";
 					cin >> levelofstudy;
-					cout << "\nGPA: ";
+					cout << "GPA: ";
 					cin >> GPA;
-					cout << "\nMajor: ";
+					cout << "Major: ";
 					cin >> major;
 
 					personlist.addPerson(new Student((firstname + " " + lastname), stringToInt(yearofbirth),
@@ -141,11 +141,35 @@ int main()
 		}
 		else if (userchoice == 'R')
 		{
-			int indexuser;
-			cout << "Please enter the number associated with the person [0-10, -1 to cancel]: ";
-			cin >> indexuser;
-			personlist.removePerson(indexuser);
+			int indexuser = 0;
+			while (indexuser != -1)
+			{
+				try
+				{
+					cout << "Please enter the number associated with the person [0-10, -1 to cancel]: ";
+					cin >> indexuser;
+					personlist.removePerson(indexuser);
+					break;
+				}
+				catch(range_error r)
+				{
+					cout << r.what();
+				}
+			}
 		}
+		else if (userchoice == 'V')
+		{
+			personlist.printPersons(nameoffile);
+		}
+
+		else if (userchoice == 'N')
+		{
+			string newfilename;
+			cout << "Please enter a file name: ";
+			cin >> newfilename;
+			personlist.printPersons(newfilename);
+		}
+
 
 		else if (userchoice == 'Q')
 		{

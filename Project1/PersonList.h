@@ -21,6 +21,8 @@ public:
 		//Initialize the personlist as completely empty.
 	void printPersons();
 		//Print all of the data for each relevant person in an easy-to-read format. Calls .write() method for each person.
+	void printPersons(string filename);
+		//Print all of the data for each relevant person in the standard format to a file.
 	void printEmployees();
 		//Print all the data for each relevaant employee in an easy-to-read format. Calls .isEmployee() for each person, and .write() method for each employee.
 	void printStudents();

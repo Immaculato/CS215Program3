@@ -1,4 +1,5 @@
-student#Dan Staley#1996#freshman#3.2#CS
-student#Jose Smith#1994#junior#3.0#MA
+student#Dan Staley#1996#freshman#3.200000#CS
+student#Jose Smith#1994#junior#3.000000#MA
 employee#Mary Hutter#1982#35,000#31
 employee#Jane Doe#1970#70,000#60
+student#Tristan Basil#1995#sophomore#4.000000#CS

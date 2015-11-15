@@ -83,6 +83,7 @@ PersonList::PersonList()
 		//Initialize the personlist as completely empty.
 void PersonList::printPersons()
 {
+	cout << "Person list:" << endl;
 	for (int i = 0; i < personlist.size(); i++)
 	{
 		cout << i << ".";
@@ -93,6 +94,7 @@ void PersonList::printPersons()
 		//Print all of the data for each relevant person in an easy-to-read format. Calls .write() method for each person.
 void PersonList::printEmployees()
 {
+	cout << "Employee list:" << endl;
 	for (int i = 0; i < personlist.size(); i++)
 	{
 		Person* personptr = personlist[i];
@@ -109,6 +111,7 @@ void PersonList::printEmployees()
 		//Print all the data for each relevaant employee in an easy-to-read format. Calls .isEmployee() for each person, and .write() method for each employee.
 void PersonList::printStudents()
 {
+	cout << "Student list:" << endl;
 	for (int i = 0; i < personlist.size(); i++)
 	{
 		Person* personptr = personlist[i];
@@ -160,6 +163,7 @@ void PersonList::addPerson(Person* givenperson)
 		//Push back a given person to the personlist.
 void PersonList::removePerson(int personindex)
 {
+	delete personlist[personindex];
 	if (personindex >= 0 && personindex < personlist.size())
 	{
 		for (int i = personindex; i < personlist.size()-1; i++)
@@ -169,8 +173,20 @@ void PersonList::removePerson(int personindex)
 	}
 	else
 	{
-		throw range_error("Index out of range!");
+		throw range_error("Error: person number out of bounds\n\n");
 	}
 	personlist.pop_back();
+}
+
+void PersonList::printPersons(string filename)
+{
+	ofstream outputfile;
+	outputfile.open(filename.c_str());
+	for (int i = 0; i < personlist.size(); i++)
+		{
+			outputfile << personlist[i]->writeFormatted() << endl;
+		}
+	outputfile.close();
+	cout << "Saved " << filename << ".\n";
 }
 		//Remove a given person from the personlist.
