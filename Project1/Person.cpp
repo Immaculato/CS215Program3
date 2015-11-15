@@ -1,5 +1,6 @@
 #include "Person.h"
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -65,7 +66,8 @@ int Employee::getDuration() const
 			//Return the int amount of time in months the employee has been employed.
 void Employee::write() const
 {
-	cout << "THIS IS WRITING FROM EMPLOYEE" << personName() << personYear() << salary << duration << endl;
+	cout << " " << personName() << ":\n   Year of birth: " << personYear() << "\n   Salary: " << salary 
+		<< "\n   Duration of employment: " << duration << endl;
 
 }
 
@@ -104,8 +106,8 @@ string Student::getMajor() const
 			//Return the major of the student as a string.
 void Student::write() const
 {
-	cout << "THIS IS WRITING FROM STUDNENT CLASS: " << personName() << personYear() << levelofstudy << GPA
-		<< major << endl;
+	cout << " " << personName() << ":\n   Year of birth: " << personYear() << "\n   Student level: " 
+		<< levelofstudy << "\n   GPA: " << GPA << "\n   Major: " << major << endl;
 }
 
 		//Rather than just print the student's name and year, this override will print those, with the student's level of study, gpa, and major.

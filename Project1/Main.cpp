@@ -43,6 +43,53 @@ int main()
 	personlist.printPersons();
 
 	system("pause");
+
+	bool finishedwithprogram = false;
+	char userchoice;
+	while (!finishedwithprogram)
+	{
+		cin >> userchoice;
+		if (userchoice == 'P')
+		{
+			personlist.printPersons();
+		}
+		else if (userchoice == 'E')
+		{
+			personlist.printEmployees();
+		}
+		else if (userchoice == 'S')
+		{
+			personlist.printStudents();
+		}
+		else if (userchoice == 'F')
+		{
+			string personlookingfor;
+			cout << "Person's Name? ";
+			getline(cin, personlookingfor);
+			personlist.findPerson(personlookingfor).write();
+		}
+		else if (userchoice == 'A')
+		{
+			char personstatus;
+			cin >> personstatus;
+			if (personstatus == 'E')
+			{
+				string name;
+				string yearofbirth;
+				string salary;
+				string durationofemployment;
+				cout << "Name: ";
+				getline(cin, name);
+				cout << "\nYear of Birth: ";
+				cin >> yearofbirth;
+				cout << "\nSalary: ";
+				cin >> salary;
+				cout << "\nDuration of employment";
+				cin >> durationofemployment;
+			}
+		}
+	}
+
 }
 /*
 int main():  Main driver program.

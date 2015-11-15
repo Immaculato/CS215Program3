@@ -85,7 +85,9 @@ void PersonList::printPersons()
 {
 	for (int i = 0; i < personlist.size(); i++)
 	{
+		cout << i+1 << ".";
 		personlist[i]->write();
+		cout << "\n";
 	}
 }
 		//Print all of the data for each relevant person in an easy-to-read format. Calls .write() method for each person.
@@ -97,7 +99,9 @@ void PersonList::printEmployees()
 		Employee* employeeptr = dynamic_cast<Employee*>(personptr);
 		if (employeeptr) // if converted pointer is not NULL
 			{
+				cout << i+1 << ".";
 				employeeptr->write();
+				cout << "\n";
 			}
 	}
 }
@@ -111,7 +115,9 @@ void PersonList::printStudents()
 		Student* studentptr = dynamic_cast<Student*>(personptr);
 		if (studentptr) // if converted pointer is not NULL
 			{
+				cout << i+1 << ".";
 				studentptr->write();
+				cout << "\n";
 			}
 	}
 }
