@@ -72,6 +72,7 @@
   <ItemGroup>
     <ClInclude Include="Employee.h" />
     <ClInclude Include="Helpers.h" />
+    <ClInclude Include="Main.h" />
     <ClInclude Include="Person.h" />
     <ClInclude Include="PersonList.h" />
     <ClInclude Include="Student.h" />

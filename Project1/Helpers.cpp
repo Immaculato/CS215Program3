@@ -1,3 +1,11 @@
+/* Tristan Basil
+ * CS 215, Fall 2015
+ * Programming assignment 3
+ * Nov 15, 2015
+ *
+ * Implementation of the Helper functions, declared in Helpers.h.
+ */
+
 #include <stdexcept>
 #include <iostream>
 #include <sstream>

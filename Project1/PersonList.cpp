@@ -1,17 +1,16 @@
+/* Tristan Basil
+ * CS 215, Fall 2015
+ * Programming assignment 3
+ * Nov 15, 2015
+ *
+ * Implementation of the PersonList class, alongside the parsePerson helper function, declared in Personlist.h.
+ */
+
 #include "PersonList.h"
 #include <fstream>
 #include <cstdlib>
 
 using namespace std;
-
-// Helper function to parse a line from the person list file.
-//
-// TODO: adjust this to match your classes, and add support for the
-// other type of person.
-//
-// NOTE: You should cut and paste this function into your PersonList 
-// class source file and declare the function prototype in the header
-// file.
 
 Person* parsePerson(string line)
 {
@@ -75,34 +74,34 @@ PersonList::PersonList(string filename)
 
 	}
 }
-		//Initialize the personlist by parsing information from a given file.
+
 PersonList::PersonList()
 {
+	//initalize the personlist as empty.
 }
 
-		//Initialize the personlist as completely empty.
 void PersonList::printPersons()
 {
 	cout << "Person list:" << endl;
 	for (int i = 0; i < personlist.size(); i++)
 	{
-		cout << i << ".";
-		personlist[i]->write();
+		cout << i << ".";			//Print all of the data for each person in an easy-to-read
+		personlist[i]->write();		//format.
 		cout << "\n";
 	}
 }
-		//Print all of the data for each relevant person in an easy-to-read format. Calls .write() method for each person.
+		
 void PersonList::printEmployees()
 {
 	cout << "Employee list:" << endl;
-	for (int i = 0; i < personlist.size(); i++)
+	for (int i = 0; i < personlist.size(); i++)   //for each person in the list,
 	{
 		Person* personptr = personlist[i];
-		Employee* employeeptr = dynamic_cast<Employee*>(personptr);
-		if (employeeptr) // if converted pointer is not NULL
+		Employee* employeeptr = dynamic_cast<Employee*>(personptr);		//if the pointer points to an employee
+		if (employeeptr) // (if converted pointer is not NULL; it was downcast successfully),
 			{
-				cout << i << ".";
-				employeeptr->write();
+				cout << i << ".";    
+				employeeptr->write();  //cout it!
 				cout << "\n";
 			}
 	}
@@ -112,14 +111,14 @@ void PersonList::printEmployees()
 void PersonList::printStudents()
 {
 	cout << "Student list:" << endl;
-	for (int i = 0; i < personlist.size(); i++)
+	for (int i = 0; i < personlist.size(); i++)   //for each person in the list,
 	{
 		Person* personptr = personlist[i];
-		Student* studentptr = dynamic_cast<Student*>(personptr);
-		if (studentptr) // if converted pointer is not NULL
+		Student* studentptr = dynamic_cast<Student*>(personptr);  //if the pointer points to a student
+		if (studentptr) // (if converted pointer is not NULL; it was downcast successfully),
 			{
 				cout << i << ".";
-				studentptr->write();
+				studentptr->write();  //cout it!
 				cout << "\n";
 			}
 	}
@@ -130,63 +129,67 @@ Person* PersonList::findPerson(string personname)
 {
 	bool notfound = true;
 	int index = 0;
-	while (notfound && (index < personlist.size()))
+	while (notfound && (index < personlist.size())) //until the person is found or the list is exhausted,
 	{
-		if ((personlist[index]->personName()) == personname )
+		if ((personlist[index]->personName()) == personname )  //if the person's name at that index matches,
 		{
-			return personlist[index];
+			return personlist[index];  //return the pointer to that person.
 		}
 		index++;
 	}
-	throw runtime_error("Person not found!");
+	throw runtime_error("Person not found!");  //if the person can't be found, throw an error to show it.
 }
 
 int PersonList::findIndexPerson(string personname)
 {
 	bool notfound = true;
 	int index = 0;
-	while (notfound && (index < personlist.size()))
+	while (notfound && (index < personlist.size()))  //until the person is found or the list is exhausted,
 	{
-		if ((personlist[index]->personName()) == personname )
+		if ((personlist[index]->personName()) == personname )  //if the person's name at that index matches,
 		{
-			return index;
+			return index;  //return the index pointing to that name.
 		}
 		index++;
 	}
-	throw runtime_error("Person not found!");
+	throw runtime_error("Person not found!");  //if it can't be found, throw an error to show it.
 }
-		//Search for a person with the given string name in the vector of persons. If found, return the person object corresponding to the given person name. Uses .personName() method to find the name of each person.
+		
 void PersonList::addPerson(Person* givenperson)
 {
-	personlist.push_back(givenperson);
+	personlist.push_back(givenperson);  //push back the given person pointer to the personlist.
 }
-		//Push back a given person to the personlist.
+
 void PersonList::removePerson(int personindex)
 {
-	delete personlist[personindex];
-	if (personindex >= 0 && personindex < personlist.size())
+	if (personindex >= 0 && personindex < personlist.size())  //if the index is in range of the personlist,
 	{
-		for (int i = personindex; i < personlist.size()-1; i++)
+		delete personlist[personindex]; //delete the memory allocated to that person, and
+		for (int i = personindex; i < personlist.size()-1; i++) //for each person after,
 		{
-			personlist[i] = personlist[i+1];
+			personlist[i] = personlist[i+1]; //move them down one to accomodate the absence.
 		}
 	}
-	else
+	else  //if the index is out of range,
 	{
-		throw range_error("Error: person number out of bounds\n\n");
+		throw range_error("Error: person number out of bounds\n\n");  //throw an error that says so.
 	}
-	personlist.pop_back();
+	personlist.pop_back();  //knowing the method worked succesfully, take off the last person on the list.
 }
 
 void PersonList::printPersons(string filename)
 {
 	ofstream outputfile;
-	outputfile.open(filename.c_str());
-	for (int i = 0; i < personlist.size(); i++)
+	outputfile.open(filename.c_str());  //open a file with the name specified.
+	for (int i = 0; i < personlist.size(); i++)  //for each person in the personlist,
 		{
-			outputfile << personlist[i]->writeFormatted() << endl;
+			outputfile << personlist[i]->writeFormatted() << endl;  //output its formatted info to the specified file.
 		}
-	outputfile.close();
-	cout << "Saved " << filename << ".\n";
+	outputfile.close();   //close the file to save the changes, and
+	cout << "Saved " << filename << ".\n";  //say it was saved.
 }
-		//Remove a given person from the personlist.
+
+int PersonList::sizeOfList() const
+{
+	return personlist.size();  //return the size of the person list.
+}
